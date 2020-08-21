@@ -1,0 +1,52 @@
+{
+    "products": [
+        {
+            "_id":"watch1",
+            "title": "Часы Romanson",
+            "image": "/images/watch1-black.jpg",
+            "description": "Кварцевые наручные часы Romanson",
+            "price": 8500,
+            "availableColor": ["black", "brown"]
+        },
+        {
+            "_id":"watch2",
+            "title": "Часы наручные Casio MTP-1200A-1A",
+            "image": "/images/watch2-black.jpg",
+            "description": "Японские классические кварцевые мужские часы Casio серии Collection Men. Прочный стальной корпус и сапфировое стекло. Данная модель имеет и водозащиту 5 атмосфер, что позволяет в часах спокойно плавать.",
+            "price": 4190,
+            "availableColor": ["black", "blue", "white"]
+        },
+        {
+            "_id":"watch3",
+            "title": "Часы наручные Casio SGW-500H-2B",
+            "image": "/images/watch3-black.jpg",
+            "description": "Многофункциональные и сдержанные часы в спортивном стиле станут идеальным выбором для современных мужчин.",
+            "price": 18290,
+            "availableColor": ["black", "brown", "white"]
+        },
+        {
+            "_id":"watch4",
+            "title": "Часы Восток командирские - ВМФ",
+            "image": "/images/watch4-blue.jpg",
+            "description": "Механические наручные часы",
+            "price": 1900,
+            "availableColor": ["blue", "white"]
+        },
+        {
+            "_id":"watch5",
+            "title": "Часы Orient Хронограф с будильником",
+            "image": "/images/watch5-black.jpg",
+            "description": "Кварцевые наручные часы Orient. Имеет секундомер с точностью показаний 1/5 сек и максимальным временем измерения - 1 час.",
+            "price": 9860,
+            "availableColor": ["black"]
+        },
+        {
+            "_id":"watch6",
+            "title": "Часы наручные Casio (Касио) EF-500D-2A",
+            "image": "/images/watch6-blue.jpg",
+            "description": "Часы-хронограф - часы с двумя независимыми измерительными системами: одна показывает текущее время, другая измеряет короткие промежутки времени. Счетчик регистрирует секунды, минуты и часы и может быть включен или выключен по желанию. ",
+            "price": 5000,
+            "availableColor": ["black", "blue"]
+        }
+    ]
+}
