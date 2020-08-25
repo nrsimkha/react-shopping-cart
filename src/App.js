@@ -4,6 +4,8 @@ import data from './data.json'
 import Products from './components/Products';
 import Filter from './components/Filter';
 import Cart from './components/Cart';
+import store from './store';
+import { Provider } from 'react-redux';
 
 class App extends React.Component {
   constructor(props){
@@ -77,23 +79,25 @@ class App extends React.Component {
   }
   render () {
       return (
-      <div className="grid-container">
-          <header>
-            <a href="/">React Shopping cart</a>
-          </header>
-          <main>
-            <div className="content">
-              <div className="main">
-                <Filter count={this.state.products.length} color={this.state.color} sort={this.state.sort} filterProducts={this.filterProducts} sortProducts={this.sortProducts}/>
-                <Products addToCart={this.addToCart} products={this.state.products}/>
+      <Provider store={store}>
+        <div className="grid-container">
+            <header>
+              <a href="/">React Shopping cart</a>
+            </header>
+            <main>
+              <div className="content">
+                <div className="main">
+                  <Filter count={this.state.products.length} color={this.state.color} sort={this.state.sort} filterProducts={this.filterProducts} sortProducts={this.sortProducts}/>
+                  <Products addToCart={this.addToCart} products={this.state.products}/>
+                </div>
+                <div className="sidebar">
+                  <Cart createOrder={this.createOrder} removeFromCart={this.removeFromCart} cartItems={this.state.cartItems}/>
+                </div>
               </div>
-              <div className="sidebar">
-                <Cart createOrder={this.createOrder} removeFromCart={this.removeFromCart} cartItems={this.state.cartItems}/>
-              </div>
-            </div>
-          </main>
-          <footer>All right is reserved</footer>
-      </div>
+            </main>
+            <footer>All right is reserved</footer>
+        </div>
+      </Provider>
     );
   }
 
