@@ -12,7 +12,7 @@ class App extends React.Component {
       return (
       <Provider store={store}>
         <div className="grid-container">
-        <Header />
+            <Header />
             <main>
               <div className="content">
                 <div className="main">
