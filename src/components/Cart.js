@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import formatCurrency from '../util';
 import Fade from 'react-reveal/Fade';
+import { connect } from 'react-redux';
+import { removeFromCart, changeCartStatus } from '../actions/cartActions';
 
-export default class Cart extends Component {
+class Cart extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -12,6 +14,7 @@ export default class Cart extends Component {
             showCheckout: false
         }
     }
+
     handleInput = (event) => {
         this.setState({ [event.target.name]: event.target.value });
     }
@@ -27,14 +30,21 @@ export default class Cart extends Component {
     }
     render() {
         const { cartItems } = this.props;
-        return (
+        let isVisible = this.props.cartIsActive ? '' : 'none';
+        console.log(isVisible);
+        return ( 
            <div>
+               {
+               !this.props.cartIsActive  ? null :
+                (
+                <div>    
+                    <Fade top>
                 {cartItems.length === 0 
                 ? <div className="cart cart-header">Cart is empty</div>
                 : <div className="cart cart-header">You have {cartItems.length} in the cart{" "}</div>}
-
+                
                 <div className="cart">
-                    <Fade left cascade={true}>
+                    <Fade top>
                     <ul className="cart-items">
                         {cartItems.map(item => (
                             <li key={item._id}>
@@ -95,10 +105,14 @@ export default class Cart extends Component {
                     
                 )}
 
-
-            
+                </Fade>
+            </div>)} 
         </div>
         )
         
     }
 }
+export default connect((state) => ({
+    cartItems: state.cart.cartItems, 
+    cartIsActive: state.cart.cartIsActive   
+}), { removeFromCart, changeCartStatus })(Cart);
