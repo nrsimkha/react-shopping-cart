@@ -24,6 +24,7 @@ a:hover {
 }
 a {
   text-decoration: none;
+  color: #000;
 
 }
 header {
@@ -99,6 +100,95 @@ footer {
   border: 0.1rem #c0c0c0 solid;
   border-radius: 1rem;
 }
+/* side-filter */
+.flexbx{
+  display: flex;
+}
+.side-filter {
+
+
+}
+.filter-item {
+  width: 250px;
+  border:0.1rem #c0c0c0 solid; 
+   display: inline-block;
+  vertical-align: top;
+  background: #fff;
+  text-align: left;
+  padding: 2rem;  
+  margin: 1rem;
+}
+.filter-item-title{
+  padding: 2rem 0;
+  font-weight: bold;
+}
+/* checkbox */
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.control__indicator {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+.control--checkbox .control__indicator {
+  border-radius: 3px;
+}
+.control--radio .control__indicator {
+  border-radius: 50%;
+}
+.control__indicator:hover  {
+  border-color: #666;
+}
+.control input:checked ~ .control__indicator {
+  background: #fff;
+}
+
+.control__indicator:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.control input:checked ~ .control__indicator:after {
+  display: block;
+}
+
+.control--checkbox .control__indicator:after {
+  left: 5px;
+  top: 0px;
+  width: 5px;
+  height: 12px;
+  border: solid #f0c040;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.control--checkbox  {
+  border-color: #7b7b7b;
+}
+/* radio */
+.control--radio .control__indicator:after {
+  left: 5px;
+  top: 5px;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background: #f0c040;
+}
+
 /* products */
 .products{
   display: flex;
@@ -111,7 +201,7 @@ footer {
 }
 .products li{
   flex: 0 1 29rem;
-  height: 47rem;
+  height: 40rem;
   padding: 1rem;
   margin: 1rem;
   
@@ -121,15 +211,17 @@ footer {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  
 }
 .product img {
-  max-width: 37rem;
-  max-height: 37rem;
+  max-width: 30rem;
+  max-height: 30rem;
   display: block;
   margin-left: auto;
   margin-right: auto;
   
 }
+
 .product-price {
   display: flex;
   justify-content: space-between;

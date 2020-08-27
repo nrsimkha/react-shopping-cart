@@ -16,7 +16,7 @@ class Filter extends Component {
                     <option value="highest">Highest</option>
                 </select></div>
                 <div className="filter-color">Filter {" "}
-                <select value={this.props.color} onChange={(e) => this.props.filterProducts(this.props.products, e.target.value)}>
+                <select value={this.props.color} onChange={(e) => this.props.filterProducts(this.props.filteredProducts, e.target.value)}>
                     <option value="">All</option>
                     <option value="black">black</option>
                     <option value="blue">blue</option>

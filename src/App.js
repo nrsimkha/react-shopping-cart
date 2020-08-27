@@ -6,6 +6,7 @@ import Cart from './components/Cart';
 import store from './store';
 import { Provider } from 'react-redux';
 import Header from './components/Header';
+import SideFilter from './components/SideFilter';
 
 class App extends React.Component {
   render () {
@@ -17,7 +18,10 @@ class App extends React.Component {
               <div className="content">
                 <div className="main">
                   <Filter/>
-                  <Products />
+                  <div className="flexbx">
+                    <SideFilter />
+                    <Products />
+                  </div>
                 </div>
                 <div className="sidebar">
                   <Cart />

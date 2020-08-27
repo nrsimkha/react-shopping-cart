@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS, FILTER_PRODUCTS_BY_COLOR, ORDER_PRODUCTS_BY_PRICE } from "../types";
+import { FETCH_PRODUCTS, FILTER_PRODUCTS_BY_COLOR, FILTER_PRODUCTS_BY_BRAND, ORDER_PRODUCTS_BY_PRICE } from "../types";
 
 export const fetchProducts = () => async (dispatch) => {
     const res = await fetch("http://localhost:5000/api/products");
@@ -18,6 +18,18 @@ export const filterProducts = (products, color) => (dispatch) => {
         },
     });
 }
+
+export const filterProductsByBrand = (products, brand) => (dispatch) => {
+    dispatch({
+        type: FILTER_PRODUCTS_BY_BRAND,
+        payload: {
+            brand: brand,
+            items: brand === "" ? products : products.filter(product => product.brand === brand)
+        },
+    });
+}
+
+
 export const sortProducts = (filteredProducts, sort) => (dispatch) => {
     const sortedProducts = filteredProducts.slice();
     if(sort === ""){
