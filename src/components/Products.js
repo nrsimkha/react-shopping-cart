@@ -17,6 +17,7 @@ class Products extends Component {
     componentDidMount(){
         this.props.fetchProducts();
     }
+
     openModal = (product) => {
         this.setState({ product });
     }
@@ -27,11 +28,12 @@ class Products extends Component {
         const { product } = this.state;
         return (
             <div>
-                <Fade bottom cascade={true}>
+                
                     {
                         !this.props.products  ? (<div>Loading...</div>) :
                             (<ul className="products">
                                 {this.props.products.map(product => (
+                                <Fade bottom cascade={true}>
                                     <li key={product._id}>
                                         <div className="product">
                                             <a href={"#" + product._id} onClick={() => this.openModal(product)}>
@@ -46,11 +48,13 @@ class Products extends Component {
                                             </div>
                                         </div>
                                     </li>
+                                    </Fade>
                                 ))}
+
                             </ul>)
                     }
 
-                </Fade>
+               
                 {
                     product && (
                         <Modal isOpen={true} onRequestClose={this.closeModal}>
@@ -88,4 +92,4 @@ class Products extends Component {
         )
     }
 }
-export default connect((state) => ({products: state.products.filteredItems}), {fetchProducts, addToCart})(Products);
+export default connect((state) => ({products: state.products.filteredItems, brand: state.products.brand}), {fetchProducts, addToCart})(Products);

@@ -1,67 +1,82 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { filterProductsByBrand } from '../actions/productActions';
+import { filterProducts } from '../actions/productActions';
 
 class SideFilter extends Component {
-    componentDidUpdate(props) {
-        if (this.props.someImportantItem && !props.someImportantItem || this.props.someImportantItem !== props.someImportantItem) {
-          // code here to make a request
-        }
-      }
+
     render() {
         return (
             <div className="side-filter">
-                <div className="filter-item">
+                <div className="filter-item" data-id="price">
                <div className="filter-item-title">Цена</div>               
-                    <label class="control control--radio">Меньше 3 000
-                    <input type="radio" name="radio" value="under_3" />
-                    <div class="control__indicator"></div>
+                    <label className="control control--radio">Меньше 3 000
+                    <input type="radio" name="radio" data-min="0" data-max="3001" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.getAttribute("data-min"), e.target.getAttribute("data-max")))}/>
+                    <div className="control__indicator"></div>
                     </label>
-                    <label class="control control--radio">3 000 - 5 000
-                    <input type="radio" name="radio"/>
-                    <div class="control__indicator"></div>
+                    <label className="control control--radio">3 000 - 5 000
+                    <input type="radio" name="radio" data-min="3001" data-max="5001" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.getAttribute("data-min"), e.target.getAttribute("data-max")))}/>
+                    <div className="control__indicator"></div>
                     </label>
-                    <label class="control control--radio">Больше 5 000
-                    <input type="radio" name="radio"/>
-                    <div class="control__indicator"></div>
+                    <label className="control control--radio">Больше 5 000
+                    <input type="radio" name="radio" data-min="5001" data-max="1000000" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.getAttribute("data-min"), e.target.getAttribute("data-max")))}/>
+                    <div className="control__indicator"></div>
                     </label>
                </div>
-               <div className="filter-item">
+               <div className="filter-item" data-id="brand">
                <div className="filter-item-title">Производитель</div>
-               <label class="control control--checkbox"><span>Casio</span>
-                    <input type="checkbox" value="Casio" onChange={(e) => this.props.filterProductsByBrand(this.props.products, e.target.value)}/>
-                    <div class="control__indicator"></div>
+               <label className="control control--checkbox"><span>Casio</span>
+                    <input type="checkbox" value="Casio" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value))}/>
+                    <div className="control__indicator"></div>
                     </label>
-                    <label class="control control--checkbox">Romanson
-                    <input type="checkbox" value="Romanson" onChange={(e) => this.props.filterProductsByBrand(this.props.products, e.target.value)}/>
-                    <div class="control__indicator"></div>
+                    <label className="control control--checkbox">Romanson
+                    <input type="checkbox" value="Romanson" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value,))}/>
+                    <div className="control__indicator"></div>
                     </label>
-                    <label class="control control--checkbox">Orient
-                    <input type="checkbox Orient" onChange={(e) => this.props.filterProductsByBrand(this.props.products, e.target.value)}/>
-                    <div class="control__indicator"></div>
+                    <label className="control control--checkbox">Orient
+                    <input type="checkbox" value="Orient" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value,))}/>
+                    <div className="control__indicator"></div>
                     </label>
-                    <label class="control control--checkbox">Другие
-                    <input type="checkbox" onChange={(e) => this.props.filterProductsByBrand(this.props.products, e.target.value)}/>
-                    <div class="control__indicator"></div>
+                    <label className="control control--checkbox">Другие
+                    <input type="checkbox" onChange={(e) => this.props.filterProducts(this.props.products, e.target.value)}/>
+                    <div className="control__indicator"></div>
                     </label>
                </div>
-               <div className="filter-item">
+               <div className="filter-item" data-id="availableColor">
+               <div className="filter-item-title">Цвет</div>
+               <label className="control control--checkbox"><span>Черный</span>
+                    <input type="checkbox" value="black" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value ))}/>
+                    <div className="control__indicator"></div>
+                    </label>
+                    <label className="control control--checkbox">Коричневый
+                    <input type="checkbox" value="brown" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value ))}/>
+                    <div className="control__indicator"></div>
+                    </label>
+                    <label className="control control--checkbox">Белый
+                    <input type="checkbox" value="white" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value))}/>
+                    <div className="control__indicator"></div>
+                    </label>
+                    <label className="control control--checkbox">Синий
+                    <input type="checkbox" value="blue" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.value, e.target.parentNode.parentNode.getAttribute("data-id")))}/>
+                    <div className="control__indicator"></div>
+                    </label>
+               </div>
+               <div className="filter-item" data-id="special">
                <div className="filter-item-title">Особые характирисики</div>
-               <label class="control control--checkbox"><span>Водонепроницаемые</span>
-                    <input type="checkbox" />
-                    <div class="control__indicator"></div>
+               <label className="control control--checkbox"><span>Водонепроницаемые</span>
+                    <input type="checkbox" value="Водонепроницаемые"  onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value))}/>
+                    <div className="control__indicator"></div>
                     </label>
-                    <label class="control control--checkbox">Секундомер
-                    <input type="checkbox"/>
-                    <div class="control__indicator"></div>
+                    <label className="control control--checkbox">Секундомер
+                    <input type="checkbox" value="Секундомер" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value))}/>
+                    <div className="control__indicator"></div>
                     </label>
-                    <label class="control control--checkbox">Будильник
-                    <input type="checkbox"/>
-                    <div class="control__indicator"></div>
+                    <label className="control control--checkbox">Будильник
+                    <input type="checkbox" value="Будильник" onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value))}/>
+                    <div className="control__indicator"></div>
                     </label>
-                    <label class="control control--checkbox">Другие
-                    <input type="checkbox"/>
-                    <div class="control__indicator"></div>
+                    <label className="control control--checkbox">Другие
+                    <input type="checkbox" value="Другие"  onChange={(e) => (this.props.filterProducts(this.props.products, e.target.parentNode.parentNode.getAttribute("data-id"), e.target.value))}/>
+                    <div className="control__indicator"></div>
                     </label>
                </div>
             </div>
@@ -70,10 +85,10 @@ class SideFilter extends Component {
 }
 
 
-export default  connect((state) => ({
-    brand: state.products.brand,    
+export default  connect((state) => ({      
     products: state.products.items,
     filteredProducts: state.products.filteredItems,
-}), {
-    filterProductsByBrand    
+    filter: state.products.filter,
+}), {    
+    filterProducts    
 })(SideFilter);

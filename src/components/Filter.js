@@ -1,27 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { filterProducts, sortProducts } from '../actions/productActions';
+import {sortProducts} from '../actions/productActions';
 
 class Filter extends Component {
     render() {
         return (
             !this.props.filteredProducts ?
-            <div>Loading</div> : (
+            <div>Загрузка</div> : (
             <div className="filter">
                 <div className="filter-result">{this.props.filteredProducts.length} Products</div>
-                <div className="filter-sort">Order {" "}
+                <div className="filter-sort">Сортировать {" "}
                 <select value={this.props.sort} onChange={(e) => this.props.sortProducts(this.props.filteredProducts, e.target.value)}>
-                    <option>Lateset</option>
-                    <option value="lowest">Lowest</option>
-                    <option value="highest">Highest</option>
-                </select></div>
-                <div className="filter-color">Filter {" "}
-                <select value={this.props.color} onChange={(e) => this.props.filterProducts(this.props.filteredProducts, e.target.value)}>
-                    <option value="">All</option>
-                    <option value="black">black</option>
-                    <option value="blue">blue</option>
-                    <option value="brown">brown</option>
-                    <option value="white">white</option>
+                    <option>По новизне</option>
+                    <option value="lowest">По возрастанию цены</option>
+                    <option value="highest">По убыванию цены</option>
                 </select></div>
                 
             </div>)
@@ -29,12 +21,9 @@ class Filter extends Component {
     }
 }
 
-export default  connect((state) => ({
-    color: state.products.color,
-    sort: state.products.sort,
-    products: state.products.items,
+export default  connect((state) => ({    
+    sort: state.products.sort,   
     filteredProducts: state.products.filteredItems,
 }), {
-    filterProducts,
     sortProducts
 })(Filter);

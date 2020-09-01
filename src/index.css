@@ -105,7 +105,8 @@ footer {
   display: flex;
 }
 .side-filter {
-
+display: flex;
+flex-direction: column;
 
 }
 .filter-item {
