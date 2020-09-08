@@ -11,20 +11,21 @@ import SideFilter from './components/SideFilter';
 class App extends React.Component {
   render () {
       return (
-      <Provider store={store}>
+      <Provider store={store} >
         <div className="grid-container">
             <Header />
+            
             <main>
               <div className="content">
                 <div className="main">
                   <Filter/>
                   <div className="flexbx">
-                    <SideFilter />
-                    <Products />
+                  <div className="side-filter-wrapper"><SideFilter /></div>
+                  <Products />
                   </div>
                 </div>
                 <div className="sidebar">
-                  <Cart />
+                  <Cart outsideClickIgnoreClass={['cart-link', "primary"]}/>
                 </div>
               </div>
             </main>

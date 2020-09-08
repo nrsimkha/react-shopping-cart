@@ -16,6 +16,7 @@ class Products extends Component {
     }
     componentDidMount(){
         this.props.fetchProducts();
+        console.log(this.props.products);
     }
 
     openModal = (product) => {
@@ -31,6 +32,7 @@ class Products extends Component {
                 
                     {
                         !this.props.products  ? (<div>Loading...</div>) :
+                            this.props.mobileMenuIsActive ? null :
                             (<ul className="products">
                                 {this.props.products.map(product => (
                                 <Fade bottom cascade={true}>
@@ -92,4 +94,4 @@ class Products extends Component {
         )
     }
 }
-export default connect((state) => ({products: state.products.filteredItems, brand: state.products.brand}), {fetchProducts, addToCart})(Products);
+export default connect((state) => ({products: state.products.filteredItems, brand: state.products.brand, mobileMenuIsActive: state.products.mobileMenuIsActive}), {fetchProducts, addToCart})(Products);

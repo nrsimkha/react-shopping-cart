@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import formatCurrency from '../util';
 import Fade from 'react-reveal/Fade';
 import { connect } from 'react-redux';
-import { removeFromCart, changeCartStatus } from '../actions/cartActions';
+import { removeFromCart, changeCartStatus, closeCart } from '../actions/cartActions';
+import onClickOutside from "react-onclickoutside";
 
 class Cart extends Component {
     constructor(props){
@@ -18,6 +19,9 @@ class Cart extends Component {
     handleInput = (event) => {
         this.setState({ [event.target.name]: event.target.value });
     }
+    handleClickOutside = evt => {
+        if(this.props.cartIsActive) this.props.closeCart();
+      };
     createOrder = (event) => {
         event.preventDefault();
         const order = {
@@ -40,8 +44,8 @@ class Cart extends Component {
                 <div>    
                 <Fade top><div>
                     {cartItems.length === 0 
-                    ? <div className="cart cart-header">Cart is empty</div>
-                    : <div className="cart cart-header">You have {cartItems.length} in the cart{" "}</div>}
+                    ? <div className="cart cart-header">Корзина пуста</div>
+                    : <div className="cart cart-header">В корзине {cartItems.length} товар{" "}</div>}
                     
                     <div className="cart">
                     
@@ -116,4 +120,4 @@ class Cart extends Component {
 export default connect((state) => ({
     cartItems: state.cart.cartItems, 
     cartIsActive: state.cart.cartIsActive   
-}), { removeFromCart, changeCartStatus })(Cart);
+}), { removeFromCart, changeCartStatus, closeCart })(onClickOutside(Cart));
