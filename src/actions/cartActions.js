@@ -1,5 +1,5 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, CHANGE_CART_STATUS } from "../types";
-
+import { ADD_TO_CART, REMOVE_FROM_CART, CHANGE_CART_STATUS, CLOSE_CART } from "../types";
+import _ from 'lodash';
 
 export const addToCart = (product) => (dispatch, getState) => {
     const cartItems = getState().cart.cartItems.slice();
@@ -22,7 +22,16 @@ export const addToCart = (product) => (dispatch, getState) => {
 }
 
 export const removeFromCart = (product) => (dispatch, getState) => {
-    const cartItems = getState().cart.cartItems.slice().filter(item => item._id !== product._id);
+    let cartItems = getState().cart.cartItems.slice();
+    const productIndex = _.findIndex(cartItems, function(item) { return item._id === product._id; });
+    
+    console.log(productIndex);
+    if(cartItems[productIndex].count > 1){
+        cartItems[productIndex].count--;
+    }else{
+        cartItems = getState().cart.cartItems.slice().filter(item => item._id !== product._id);
+    }
+
     console.log(product);
     console.log(cartItems);
     dispatch({
@@ -39,5 +48,11 @@ export const changeCartStatus = () => (dispatch, getState) => {
     dispatch({
         type: CHANGE_CART_STATUS,
         payload: {cartItems,cartIsActive: cartIsActive}
+    });
+}
+export const closeCart = () => (dispatch) => {   
+    dispatch({
+        type: CLOSE_CART,
+        payload: {cartIsActive: false}
     });
 }
