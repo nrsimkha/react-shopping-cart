@@ -353,6 +353,32 @@ input{
   display: none;
 }
 
+/* Order details*/
+
+.order-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+.order-details li{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-details li div {
+  padding: 10px;
+}
+.order-details .items {
+  text-align: right;
+  padding: 0;
+}
+.success-message{
+  color: green;
+}
 @media screen and (max-width: 600px) {
   .side-filter-wrapper, .filter {
     display: none;

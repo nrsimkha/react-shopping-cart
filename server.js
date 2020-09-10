@@ -40,6 +40,36 @@ app.delete("/api/products/:id", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
+const Order = mongoose.model("order", new mongoose.Schema({
+        _id:{
+            type: String,
+            default: shortid.generate
+        },
+        email: String,
+        name: String,
+        address: String,
+        total: Number,
+        cartItems: [
+            {
+                _id: String,
+                title: String,
+                price: Number,
+                count: String
+            }
+        ]
+    },
+    {
+        timestamps: true
+    }
+))
+app.post("/api/orders", async(req, res) => {
+    if(!req.body.name || !req.body.email || !req.body.address || !req.body.total || !req.body.cartItems){
+        return res.send({message: "Data is required"})
+    }
+    const order = await Order(req.body).save();
+    res.send(order);
+})
+
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
   });
