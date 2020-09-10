@@ -41,9 +41,7 @@ export const filterProducts = (products, property, term1, term2) => (dispatch, g
 
     let productFilter = getState().products.activeFilters; 
     let productFilters = getState().products.allFilters;
-    console.log(productFilters);
-    console.log(productFilters[property]);
-    console.log(term1);    
+  
     toggleCheckbox(productFilters, property, term1)
     
 
@@ -53,60 +51,24 @@ export const filterProducts = (products, property, term1, term2) => (dispatch, g
             productFilter = [];
         }else{
             productFilter = _.omit(productFilter, [property]);
-        }
-        
+        }        
     }else{
-
         if(property === 'price'){
             productFilter[property] = [term1, term2];
         }else{
-            /*let isActive = productFilters[property][currentKey]['isActive'];    
-            productFilters[property][currentKey]['isActive'] = (isActive) ? false : true;*/
             (productFilter[property]) 
                 ? ((productFilter[property].indexOf(term1) !== -1) 
                     ? _.pull(productFilter[property], term1)
                     : productFilter[property].push(term1) )
                 : productFilter[property] = Array(term1);
         }
-       /* (property === 'price') 
-            ? productFilter[property] = [term1, term2]
-            : (productFilter[property]) 
-                ? ((productFilter[property].indexOf(term1) !== -1) 
-                    ? _.pull(productFilter[property], term1)
-                    : productFilter[property].push(term1) )
-                : productFilter[property] = Array(term1);*/
     }
     
     let filters = {};
 
-    console.log(term1);
-    console.log(productFilter);
-
     _.forEach(productFilter, function(value, key) {
-        if(productFilter[key].length === 0 ){
-            console.log(term1);
-            console.log(key);
-            console.log(productFilter);
-            console.log(productFilter[key]);
-            delete productFilter.key;
-        }
+        if(productFilter[key].length === 0 )delete productFilter.key;        
     });
-
-/*for (let prop in productFilters) {
-    console.log(prop);
-    _.forEach(productFilters[prop], function(value, key) {
-        console.log(value);
-        if(value.isActive){
-            if(prop === "availableColor"){
-                filters[prop] = val => !(_.isEmpty(_.intersection(val, productFilter[prop])));            
-            }else if(prop === "price"){
-                filters[prop] = val => _.inRange(val, productFilter[prop][0], productFilter[prop][1]);         
-            }else{
-                filters[prop] = val => productFilter[prop].indexOf(val) !== -1;           
-            }
-        }
-    });
-}*/
 
     for (let prop in productFilter) {
         if(productFilter[prop].length === 0){
@@ -123,7 +85,7 @@ export const filterProducts = (products, property, term1, term2) => (dispatch, g
 
     }
     const filteredProducts = _.filter(products, _.conforms(filters));
-    console.log(filteredProducts);
+    
     dispatch({
         type: FILTER_PRODUCTS,
         payload: {
@@ -165,6 +127,7 @@ export const toggleMobileMenu = () => (dispatch, getState) => {
         payload: {mobileMenuIsActive: mobileMenuIsActive}
     });
 }
+
 export const toggleSortList = () => (dispatch, getState) => {   
     const sortListOpen = getState().products.sortListOpen ? false : true;
     dispatch({
@@ -172,6 +135,7 @@ export const toggleSortList = () => (dispatch, getState) => {
         payload: {sortListOpen: sortListOpen}
     });
 }
+
 export const toggleListItem = (item) => (dispatch, getState) => { 
     let sortOptions = getState().products.sortOptions.slice();
     let currentKey = _.findKey(sortOptions, function(o) { return o.id === item; });

@@ -9,3 +9,6 @@ export const TOGGLE_MOBILE_MENU = "TOGGLE_MOBILE_MENU";
 export const CLOSE_CART = "CLOSE_CART";
 export const TOGGLE_SORT_LIST = "TOGGLE_SORT_LIST";
 export const TOGGLE_LIST_ITEM = "TOGGLE_LIST_ITEM";
+export const CREATE_ORDER = "CREATE_ORDER";
+export const CLEAR_ORDER = "CLEAR_ORDER";
+export const CLEAR_CART = "CLEAR_CART";
