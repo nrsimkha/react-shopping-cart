@@ -33,11 +33,6 @@ export const productReducer = (
         case FETCH_PRODUCTS:
             return { ...state, items: action.payload, filteredItems: action.payload, activeFilters: {}}
         case FILTER_PRODUCTS:
-            /*console.log(action.payload);
-            console.log({ 
-                ...state,
-                ...action.payload
-            });*/
             return { 
                  ...state,
                  activeFilters: action.payload.filter,
