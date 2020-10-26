@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 app.use(cors());
 console.log(process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://mongoDbUser:98765@cluster0.s1bez.mongodb.net/<dbname>?retryWrites=true&w=majority", {
+    dbName: "react-shopping-cart-db",
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
