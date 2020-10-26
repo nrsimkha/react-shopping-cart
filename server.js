@@ -7,12 +7,14 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-mongoose.connect("mongodb://localhost/react-shopping-cart-db", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/react-shopping-cart-db", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
 })
-
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose is connected!!!!');
+});
 const Product = mongoose.model("products", new mongoose.Schema({
         _id: {type: String, default: shortid.generate},
         title: String,
@@ -74,3 +76,5 @@ app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
   });
 
+
+app.use(express.static('client/build'))
