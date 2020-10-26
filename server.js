@@ -7,7 +7,8 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/react-shopping-cart-db", {
+console.log(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://mongoDbUser:98765@cluster0.s1bez.mongodb.net/<dbname>?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -77,4 +78,4 @@ app.listen(PORT, () => {
   });
 
 
-app.use(express.static('client/build'))
+//app.use(express.static('client/build'))

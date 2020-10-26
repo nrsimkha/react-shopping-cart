@@ -12,7 +12,7 @@ class Header extends Component {
                 <div className="cart-link_icon">
                     {!cartItems.length ? "" : (<div className="cart-link_count">{cartItems.length}</div>)}
                 </div>
-                  <div className="cart-link_label">Корзина</div>
+                  <div className="cart-link_label">КорзинаAAA</div>
               </div>
             </header>
            
