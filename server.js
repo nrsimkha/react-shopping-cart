@@ -32,10 +32,6 @@ const Product = mongoose.model("products", new mongoose.Schema({
     })
 );
 
-/*app.get('*', (request, response) => {
-	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});*/
-
 app.get("/api/products", async (req, res) => {
     const products = await Product.find({});
     res.send(products);
