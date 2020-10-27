@@ -2,7 +2,7 @@ import { FETCH_PRODUCTS, FILTER_PRODUCTS, ORDER_PRODUCTS_BY_PRICE, TOGGLE_MOBILE
 import _ from 'lodash';
 
 export const fetchProducts = () => async (dispatch) => {
-    const res = await fetch("http://localhost:5000/api/products");
+    const res = await fetch("/api/products");
     const data = await res.json();
     console.log(data);
     dispatch({

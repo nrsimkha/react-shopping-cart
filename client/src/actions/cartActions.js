@@ -32,8 +32,6 @@ export const removeFromCart = (product) => (dispatch, getState) => {
         cartItems = getState().cart.cartItems.slice().filter(item => item._id !== product._id);
     }
 
-    console.log(product);
-    console.log(cartItems);
     dispatch({
         type: REMOVE_FROM_CART,
         payload: {cartItems, cartIsActive: false}

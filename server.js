@@ -3,20 +3,25 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const shortid = require('shortid');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-console.log(process.env.MONGODB_URI);
+
+
 mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://mongoDbUser:98765@cluster0.s1bez.mongodb.net/react-shopping-cart-db?retryWrites=true&w=majority", {
     dbName: "react-shopping-cart-db",
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
 })
+
 mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!!!');
+    
 });
+
 const Product = mongoose.model("products", new mongoose.Schema({
         _id: {type: String, default: shortid.generate},
         title: String,
@@ -26,6 +31,10 @@ const Product = mongoose.model("products", new mongoose.Schema({
         availableColor: [String]
     })
 );
+
+/*app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});*/
 
 app.get("/api/products", async (req, res) => {
     const products = await Product.find({});
@@ -77,6 +86,16 @@ app.post("/api/orders", async(req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
   });
+  console.log(process.env.NODE_ENV);
+  if (process.env.NODE_ENV === "production") {
+    //set static folder
+    app.use(express.static("client/build"));
+  
+    app.get("*", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+  }else{
+    app.use(express.static('client/build'));
+  }
 
 
-app.use(express.static('client/build'))

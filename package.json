@@ -10,6 +10,7 @@
     "mongoose": "^5.10.10",
     "shortid": "^2.2.16"
   },
+
   "devDependencies": {},
   "scripts": {
     "build": "cd client && npm run build",
@@ -28,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/nrsimkha/react-shopping-cart/issues"
   },
-  "homepage": "https://github.com/nrsimkha/react-shopping-cart#readme"
+  "homepage": "https://github.com/nrsimkha/react-shopping-cart#readme",
+  "engines": {
+    "node": "12.19.0"
+  }
 }
